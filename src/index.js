@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound';
 import Main from './pages/Main';
 import AllRecipe from './pages/AllRecipe';
 import RecipeBook from './pages/RecipeBook';
+import Member from './pages/Member';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       { index: true, path: '/', element: <Main /> },
+      { path: '/member', element: <Member /> },
       { path: '/recipe', element: <AllRecipe /> },
       {
         path: '/recipe/:id',
