@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { login } from '../api/firebase'
 
 export default function Navbar() {
   return (
@@ -11,8 +10,8 @@ export default function Navbar() {
       <nav className='flex gap-4'>
         <Link to='/recipe'>레시피</Link>
         <Link to='/'>냉장고</Link>
-        <Link to='/member'>로그인</Link>
-        {/* <button onClick={login}>로그인</button> */}
+        <Link to='/member/login'>로그인</Link>
+        <Link to='/member/join'>회원가입</Link>
       </nav>
     </header>
   );

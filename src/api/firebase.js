@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -19,13 +19,25 @@ export function gooleLogin() {
     }).catch(console.error);
 }
 
-export function login(email, password) {
-  createUserWithEmailAndPassword(auth, email, password)
+export function join(email, password) {
+  return createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-
       const user = userCredential.user;
       console.log(user);
     })
-    .catch(console.error);
+    .catch((error) => {
+      alert(`${error.code} : ${error.message}`);
+    });
+}
+
+export function login(email, password) {
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log(user);
+    })
+    .catch((error) => {
+      alert(`${error.code} : ${error.message}`);
+    });
 }
 
