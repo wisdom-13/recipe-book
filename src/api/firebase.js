@@ -11,33 +11,36 @@ const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
-export function gooleLogin() {
-  signInWithPopup(auth, provider)
+export async function gooleLogin() {
+  return signInWithPopup(auth, provider)
     .then((result) => {
       const user = result.user;
-      console.log(user)
-    }).catch(console.error);
-}
-
-export function join(email, password) {
-  return createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      console.log(user);
+      return { state: true, data: user };
     })
     .catch((error) => {
-      alert(`${error.code} : ${error.message}`);
+      return { state: false, message: error.message };
     });
 }
 
-export function login(email, password) {
-  signInWithEmailAndPassword(auth, email, password)
+export async function join(email, password) {
+  return createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      console.log(user);
+      return { state: true, data: user };
     })
     .catch((error) => {
-      alert(`${error.code} : ${error.message}`);
+      return { state: false, message: error.message };
+    });
+}
+
+export async function login(email, password) {
+  return signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      return { state: true, data: user };
+    })
+    .catch((error) => {
+      return { state: false, message: error.message };
     });
 }
 

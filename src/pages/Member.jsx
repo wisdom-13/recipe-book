@@ -7,7 +7,7 @@ export default function Member() {
   const { type } = useParams();
 
   const [member, setMember] = useState({});
-  // const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('');
 
 
   const handelChange = (e) => {
@@ -17,7 +17,10 @@ export default function Member() {
 
   const handleJoin = (e) => {
     e.preventDefault();
-    join(member.id, member.pw);
+    join(member.id, member.pw).then((result) => {
+      !result.state && setMessage(result.message)
+      result.state && console.log(result.data)
+    });
   };
 
   const handleLogin = (e) => {
@@ -31,7 +34,7 @@ export default function Member() {
       <form className='flex flex-col px-12'>
         <input type='text' name='id' placeholder='ID' value={member.id || ""} onChange={handelChange}></input>
         <input type='password' name='pw' placeholder='Password' value={member.pw || ""} onChange={handelChange}></input>
-        {/* {message && <p>{message}</p>} */}
+        {message && <p className='text-red-500 mb-2'>{message}</p>}
         {type == 'join'
           ? <button className='h-10 px-6 font-semibold rounded-md bg-black text-white' onClick={handleJoin} type='button'>회원가입</button>
           : <button className='h-10 px-6 font-semibold rounded-md bg-black text-white' onClick={handleLogin} type='button'>로그인</button>}
