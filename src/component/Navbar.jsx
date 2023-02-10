@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuthContext } from '../context/AuthContext';
 
 export default function Navbar() {
+  const { user } = useAuthContext();
+  console.log(`user:${user.uid}`)
+
   return (
     <header className='flex justify-between'>
       <Link to='/'>
