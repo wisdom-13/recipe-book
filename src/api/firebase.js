@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -44,9 +44,16 @@ export async function login(email, password) {
     });
 }
 
+export function logout() {
+  signOut(auth).catch(console.error);
+}
+
 export function onUserStateChange(callback) {
   onAuthStateChanged(auth, async (user) => {
+    callback(user);
     // const updatedUser = user ? await adminUser(user) : null;
     // callback(updatedUser);
+
   });
 }
+

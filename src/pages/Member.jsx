@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useParams } from 'react-router';
+import { Navigate, useParams } from 'react-router';
 import { login, join, gooleLogin } from '../api/firebase';
 
 export default function Member() {
@@ -25,7 +25,14 @@ export default function Member() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    login(member.id, member.pw);
+    login(member.id, member.pw).then((result) => {
+      result.state && (
+        alert(`${result.data.email}님 환영합니다!`)
+
+      );
+      // return <Navigate to="/" replace></Navigate>
+
+    });
   };
 
   return (
