@@ -26,12 +26,8 @@ export default function Member() {
   const handleLogin = (e) => {
     e.preventDefault();
     login(member.id, member.pw).then((result) => {
-      result.state && (
-        alert(`${result.data.email}님 환영합니다!`)
-
-      );
+      alert(result.message);
       // return <Navigate to="/" replace></Navigate>
-
     });
   };
 
