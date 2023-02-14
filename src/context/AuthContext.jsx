@@ -7,11 +7,12 @@ export function AuthContextProvider({ children }) {
   const [user, setUser] = useState();
 
   useEffect(() => {
+    // console.log('useEffect')
     onUserStateChange((user) => {
       setUser(user);
-      console.log(user)
+      // console.log('useEffect change')
     })
-  }, []);
+  });
 
   // return <AuthContext.Provider value={{ user, uid: user && user.uid }}>
   //   {children}

@@ -40,7 +40,6 @@ export async function login(email, password) {
   return signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      // console.log(user)
       return { state: true, data: user, message: `${user.email}님 환영합니다!` };
     })
     .catch((error) => {
@@ -54,7 +53,9 @@ export function logout() {
 
 export function onUserStateChange(callback) {
   onAuthStateChanged(auth, async (user) => {
-    const updatedUser = user ? await adminUser(user) : null;
+    const updatedUser = user ? user : null;
+    // const updatedUser = user ? await adminUser(user) : null;
+    // console.log(await adminUser(user))
     callback(updatedUser);
   });
 }
