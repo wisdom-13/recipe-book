@@ -26,12 +26,27 @@ const nav = css`
   text-align: center;
   
   a {
-    padding: 0 0.5rem;
+    margin: 0 0.375rem;
   }
 `
 
 const menu = css`
   margin-right: auto !important;
+`
+
+const btn = css`
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
+  display: block;
+`
+
+const btn_block = css`
+  background: #000;
+  color: #fff;
 `
 
 
@@ -50,10 +65,10 @@ export default function Navbar() {
         <Link to='/'>냉장고</Link>
       </nav>
       <nav css={nav}>
-        {user && <Link to='/member/login'>내정보</Link>}
-        {user && <button type='button' onClick={logout}>로그아웃</button>}
-        {!user && <Link to='/member/login'>로그인</Link>}
-        {!user && <Link to='/member/join'>회원가입</Link>}
+        {user && <Link css={[btn, btn_block]} to='/member/login'>내정보</Link>}
+        {user && <a css={btn} href='javascript:;' onClick={logout}>로그아웃</a>}
+        {!user && <Link to='/member/login' css={btn}>로그인</Link>}
+        {!user && <Link to='/member/join' css={btn}>회원가입</Link>}
       </nav>
     </header>
   );
