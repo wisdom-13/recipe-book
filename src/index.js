@@ -9,6 +9,9 @@ import Main from './pages/Main';
 import AllRecipe from './pages/AllRecipe';
 import RecipeBook from './pages/RecipeBook';
 import Member from './pages/Member';
+import Admin from './pages/admin/Admin';
+import ItemList from './pages/admin/ItemList';
+import ItemAdd from './pages/admin/ItemAdd';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +21,14 @@ const router = createBrowserRouter([
     children: [
       { index: true, path: '/', element: <Main /> },
       { path: '/member/:type', element: <Member /> },
+      {
+        path: '/admin',
+        element: <Admin />,
+        children: [
+          { index: true, path: '/admin/item', element: <ItemList /> },
+          { path: '/admin/item/add', element: <ItemAdd /> },
+        ]
+      },
       { path: '/recipe', element: <AllRecipe /> },
       {
         path: '/recipe/:id',

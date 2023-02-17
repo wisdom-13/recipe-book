@@ -35,7 +35,7 @@ const menu = css`
 `
 
 const btn = css`
-  border: 1px solid #000;
+  border: 1px solid #222529;
   border-radius: 5px;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
