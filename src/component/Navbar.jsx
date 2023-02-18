@@ -4,6 +4,7 @@ import { jsx, css } from '@emotion/react'
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
+import Button from '../ui/Button';
 
 const header = css`
   display: flex;
@@ -34,23 +35,6 @@ const menu = css`
   margin-right: auto !important;
 `
 
-const btn = css`
-  border: 1px solid #222529;
-  border-radius: 5px;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  font-weight: 400;
-  display: block;
-`
-
-const btn_block = css`
-  background: #000;
-  color: #fff;
-`
-
-
-
 export default function Navbar() {
   const { user, logout } = useAuthContext();
   // console.log(`user:${user.uid}`)
@@ -65,10 +49,10 @@ export default function Navbar() {
         <Link to='/'>냉장고</Link>
       </nav>
       <nav css={nav}>
-        {user && <Link css={[btn, btn_block]} to='/member/login'>내정보</Link>}
-        {user && <a css={btn} href='javascript:;' onClick={logout}>로그아웃</a>}
-        {!user && <Link to='/member/login' css={btn}>로그인</Link>}
-        {!user && <Link to='/member/join' css={btn}>회원가입</Link>}
+        {user && <Button type='link' text='내정보' onClick='/member/login'></Button>}
+        {user && <Button text='로그아웃' onClick={logout}></Button>}
+        {!user && <Button type='link' text='로그인' onClick='/member/login'></Button>}
+        {!user && <Button type='link' text='회원가입' onClick='/member/join'></Button>}
       </nav>
     </header>
   );
