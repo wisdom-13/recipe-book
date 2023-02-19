@@ -2,13 +2,15 @@ import React from 'react';
 import { useState } from 'react';
 import { Navigate, useParams } from 'react-router';
 import { login, join, gooleLogin } from '../api/firebase';
+import Button from '../ui/Button';
+import Form from '../ui/Form';
+import Section from '../ui/Section';
 
 export default function Member() {
   const { type } = useParams();
 
   const [member, setMember] = useState({});
   const [message, setMessage] = useState('');
-
 
   const handelChange = (e) => {
     const { name, value } = e.target;
@@ -32,19 +34,18 @@ export default function Member() {
   };
 
   return (
-    <section>
-      <h2 className='text-2xl'>{type == 'join' ? '회원가입' : '로그인'}</h2>
-      <form className='flex flex-col px-12'>
+    <Section>
+      <Form>
+        <h2>{type == 'join' ? '회원가입' : '로그인'}</h2>
         <input type='text' name='id' placeholder='ID' value={member.id || ""} onChange={handelChange}></input>
         <input type='password' name='pw' placeholder='Password' value={member.pw || ""} onChange={handelChange}></input>
-        {message && <p className='text-red-500 mb-2'>{message}</p>}
+        {message && <p>{message}</p>}
         {type == 'join'
-          ? <button className='h-10 px-6 font-semibold rounded-md bg-black text-white' onClick={handleJoin} type='button'>회원가입</button>
-          : <button className='h-10 px-6 font-semibold rounded-md bg-black text-white' onClick={handleLogin} type='button'>로그인</button>}
-      </form>
-
-      <button onClick={gooleLogin}>구글 로그인</button>
-    </section>
+          ? <Button text='회원가입' style='dark' onClick={handleJoin}></Button>
+          : <Button text='로그인' style='dark' onClick={handleLogin}></Button>}
+        <button onClick={gooleLogin}>구글 로그인</button>
+      </Form>
+    </Section>
   );
 }
 
