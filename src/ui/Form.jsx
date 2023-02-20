@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 
-export default function Form({ children }) {
+export default function Form({ children, onSubmit }) {
 
   const form = css`
     display: flex;
@@ -22,7 +22,7 @@ export default function Form({ children }) {
   `
 
   return (
-    <form css={form}>
+    <form css={form} onSubmit={onSubmit}>
       {children}
     </form>
   );
